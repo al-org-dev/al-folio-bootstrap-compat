@@ -14,11 +14,12 @@
 
   const placeFloating = (trigger, bubble) => {
     const rect = trigger.getBoundingClientRect();
-    const top = rect.top + window.scrollY - bubble.offsetHeight - 8;
-    const left = rect.left + window.scrollX + rect.width / 2 - bubble.offsetWidth / 2;
+    const top = rect.top - bubble.offsetHeight - 8;
+    const left = rect.left + rect.width / 2 - bubble.offsetWidth / 2;
+    const maxLeft = window.innerWidth - bubble.offsetWidth - 8;
 
     bubble.style.top = `${Math.max(top, 8)}px`;
-    bubble.style.left = `${Math.max(left, 8)}px`;
+    bubble.style.left = `${Math.min(Math.max(left, 8), Math.max(maxLeft, 8))}px`;
   };
 
   const initTooltips = (root) => {
